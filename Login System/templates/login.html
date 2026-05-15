@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:20px;
+        }
+
+        .login-container{
+            width:420px;
+            background:white;
+            padding:30px;
+            border-radius:22px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .logo{
+            text-align:center;
+            font-size:30px;
+            margin-bottom:10px;
+        }
+
+        h1{
+            text-align:center;
+            font-size:28px;
+            margin-bottom:6px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:gray;
+            font-size:14px;
+            margin-bottom:24px;
+        }
+
+        .input-group{
+            position:relative;
+            margin-bottom:14px;
+        }
+
+        .input-box{
+            width:100%;
+            padding:14px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            font-size:14px;
+            outline:none;
+            transition:0.2s;
+        }
+
+        .input-box:focus{
+            border-color:black;
+        }
+
+        .toggle-password{
+            position:absolute;
+            right:14px;
+            top:50%;
+            transform:translateY(-50%);
+            cursor:pointer;
+            font-size:14px;
+            color:gray;
+        }
+
+        .forgot-password{
+            text-align:right;
+            margin-bottom:18px;
+            font-size:13px;
+        }
+
+        .forgot-password a{
+            text-decoration:none;
+            color:black;
+        }
+
+        .continue-btn{
+            width:100%;
+            padding:14px;
+            background:black;
+            color:white;
+            border:none;
+            border-radius:12px;
+            font-size:15px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        
+        .continue-btn{
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                opacity 0.25s ease;
+
+        }
+
+        .continue-btn:hover{
+
+            /* Slight lift upward */
+            transform:translateY(-2px);
+
+            /* Combined shadow + glow */
+            box-shadow:
+                0 10px 20px rgba(0,0,0,0.15),
+                0 0 20px rgba(0,0,0,0.25);
+
+            /* Slight fade effect */
+            opacity:0.96;
+
+        }
+        .secure-text{
+            text-align:center;
+            font-size:12px;
+            color:gray;
+            margin-top:10px;
+        }
+
+        .divider{
+            text-align:center;
+            color:gray;
+            margin:22px 0;
+            font-size:13px;
+            position:relative;
+        }
+
+        .divider::before,
+        .divider::after{
+            content:"";
+            position:absolute;
+            width:38%;
+            height:1px;
+            background:#ddd;
+            top:50%;
+        }
+
+        .divider::before{
+            left:0;
+        }
+
+        .divider::after{
+            right:0;
+        }
+
+        .social-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+        }
+
+        .social-btn{
+            padding:12px;
+            border:1px solid #ddd;
+            background:white;
+            border-radius:12px;
+            font-size:14px;
+            cursor:pointer;
+            transition:0.25s;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+
+            font-weight:600;
+        }       
+
+        .social-btn:hover{
+            background:#f8f8f8;
+            transform:translateY(-2px);
+        }
+
+        /* Icon Size */
+        .social-btn i{
+            font-size:18px;
+        }
+
+        /* Google */
+        .social-btn.google i{
+            color:#EA4437;
+        }
+
+        /* Apple */
+        .apple i{
+            color:black;
+        }
+
+        /* Microsoft */
+        .microsoft i{
+            color:#00A4EF;
+        }
+
+        /* GitHub */
+        .github{
+            background:#24292e;
+            color:white;
+            border:none;
+        }
+
+        .github i{
+            color:white;
+        }
+
+        /* Passkey */
+        .passkey i{
+            color:#6C63FF;
+        }
+
+        /* Work Account */
+        .work i{
+            color:#ff9800;
+        }
+
+
+
+        .more-options{
+            text-align:center;
+            margin-top:14px;
+        }
+
+        .more-options button{
+            border:none;
+            background:none;
+            cursor:pointer;
+            color:black;
+            font-size:13px;
+            font-weight:bold;
+        }
+
+        .extra-options{
+            display:none;
+            margin-top:10px;
+        }
+
+        .signup{
+            text-align:center;
+            margin-top:24px;
+            font-size:14px;
+        }
+
+        .signup a{
+
+            text-decoration:none;
+
+            font-weight:bold;
+
+            color:black;
+
+            transition:0.25s ease;
+
+        }
+
+        .signup a:hover{
+
+            color:#2563eb;
+
+        }
+
+        .terms{
+            text-align:center;
+            font-size:11px;
+            color:gray;
+            margin-top:18px;
+            line-height:1.5;
+        }
+
+    
+        .terms a{
+            color:#111;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .terms a:hover{
+            text-decoration:underline;
+        }
+
+        .error-message{
+            color:red;
+            font-size:12px;
+            margin-top:-6px;
+            margin-bottom:10px;
+            display:none;
+        }
+        .google{
+         background: white;
+            color: #333;
+}
+
+        
+    </style>
+
+</head>
+
+
+<body>
+    
+
+
+    <div class="login-container">
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}">
+        </div>
+        <h22>
+        <h1>BRAND NAME</h1>
+
+        <div class="subtitle">
+            Welcome back! Please log in to continue
+        </div>
+
+        <form action="/login" method="POST" id="loginForm">
+
+            <div class="input-group">
+                <input 
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    class="input-box"
+                    required
+                >
+            </div>
+
+            <div class="error-message" id="emailError">
+                Please enter a valid email
+            </div>
+
+            <div class="input-group">
+
+                <input 
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    class="input-box"
+                    required
+                >
+
+                <span class="toggle-password" onclick="togglePassword()">
+                    👁
+                </span>
+
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">
+                    Forgot password?
+                </a>
+            </div>
+
+            <button type="submit" class="continue-btn" id="continueBtn">
+                Continue
+            </button>
+
+        </form>
+
+       
+
+        <div class="divider">
+            or
+        </div>
+
+        <div class="social-grid">
+
+        <button class="social-btn">
+            <i class="fa-brands fa-google"></i>
+            Google
+        </button>
+
+        <button class="social-btn">
+            <i class="fa-brands fa-apple"></i>
+            Apple
+        </button>
+
+    </div>
+
+    <div class="more-options">
+
+        <button onclick="toggleOptions()">
+            More options
+        </button>
+
+    </div>
+
+    <div class="extra-options" id="extraOptions">
+
+        <div class="social-grid" style="margin-top:12px;">
+
+            <button class="social-btn">
+                <i class="fa-brands fa-microsoft"></i>
+                Microsoft
+            </button>
+
+            <button class="social-btn">
+                <i class="fa-brands fa-github"></i>
+                GitHub
+            </button>
+
+            <button class="social-btn">
+                <i class="fa-solid fa-key"></i>
+                Passkey
+            </button>
+
+            <button class="social-btn">
+                <i class="fa-solid fa-building"></i>
+                Work Account
+            </button>
+
+        </div>
+
+</div>
+        <div class="signup">
+            New here?
+            <a href="/signup">Create Account</a>
+
+            </a>
+        </div>
+
+        <div class="terms">
+            By continuing, you agree to our
+            <a href="/terms">Terms</a>
+            and
+            <a href="/privacy">Privacy Policy</a>.
+        </div>
+
+    </div>
+
+    <script>
+
+        function togglePassword(){
+
+            let password = document.getElementById("password");
+
+            if(password.type === "password"){
+                password.type = "text";
+            }
+            else{
+                password.type = "password";
+            }
+
+        }
+
+        function toggleOptions(){
+
+            let options = document.getElementById("extraOptions");
+
+            if(options.style.display === "block"){
+                options.style.display = "none";
+            }
+            else{
+                options.style.display = "block";
+            }
+
+        }
+
+        
+           
+
+       
+
+    </script>
+
+</body>
+</html>
