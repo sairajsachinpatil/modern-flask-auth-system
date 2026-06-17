@@ -8,9 +8,8 @@ app.secret_key = "your_secret_key"
 
 
 # =========================
-# DATABASE CONNECTION
+# DATABASE CONNECTION (Temporary to SQlite)
 # =========================
-
 def get_db_connection():
 
     conn = sqlite3.connect("database.db")
@@ -20,9 +19,8 @@ def get_db_connection():
 
 
 # =========================
-# CREATE USERS TABLE
+# CREATE USERS TABLE in SQlite
 # =========================
-
 def create_table():
 
     conn = get_db_connection()
@@ -53,7 +51,6 @@ create_table()
 # =========================
 # HOME ROUTE
 # =========================
-
 @app.route("/")
 def home():
 
@@ -67,7 +64,6 @@ def home():
 # =========================
 # LOGIN ROUTE
 # =========================
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -113,7 +109,6 @@ def login():
 # =========================
 # SIGNUP ROUTE
 # =========================
-
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
 
@@ -162,9 +157,6 @@ def signup():
 # =========================
 # DASHBOARD ROUTE
 # =========================
-
-
-
 @app.route("/dashboard")
 def dashboard():
 
@@ -173,10 +165,11 @@ def dashboard():
         return redirect(url_for("signup"))
 
     return render_template("dashboard.html")
+
+
 # =========================
 # LOGOUT ROUTE
 # =========================
-
 @app.route("/logout")
 def logout():
 
@@ -190,7 +183,6 @@ def logout():
 # =========================
 # TERMS PAGE
 # =========================
-
 @app.route("/terms")
 def terms():
 
@@ -200,7 +192,6 @@ def terms():
 # =========================
 # PRIVACY POLICY PAGE
 # =========================
-
 @app.route("/privacy")
 def privacy():
 
@@ -210,7 +201,6 @@ def privacy():
 # =========================
 # RUN APP
 # =========================
-
 if __name__ == "__main__":
 
     app.run(debug=True)
